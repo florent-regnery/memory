@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Smooch Sans', sans-serif;
+}
+
+header {
+    background-color: goldenrod;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 0.66;
+}
+
+
+/*--------------------- Header ----------------------*/
+
+a {
+    color: aliceblue;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+
+/*---------------- CSS général -------------------*/
+
+h1,
+h2,
+h3 {
+    font-size: 4vh;
+    color: goldenrod;
+}
+
+.mess {
+    color: goldenrod;
+}
+
+.bloc_jeu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.carte_face {
+    flex-basis: 33.33%;
+}
+
+.carte_face img {
+    width: 50px
+}
+
+.carte_face
+/*----------------- CSS Accueil -------------------*/
+
+
+/* ----------Connexion--------- */
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 40px;
+}
+
+.connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/*----------------- CSS Classement --------------------*/
