@@ -4,7 +4,7 @@ class Memory
 {
     private $nbPaires;
 
-    public function __construct($nbPaires)
+    public function __construct($nbPaires = 0)
     {
         $this->nbPaires = $nbPaires;
     }
@@ -33,6 +33,7 @@ class Memory
     public function afficheCarte()
     {
         if (isset($_POST['id_carte'])) {
+            $_SESSION['nb_click'] = isset($_SESSION['nb_click']) ? $_SESSION['nb_click'] + 1 : 1;
             $_SESSION['plateau'][$_POST['id_carte']]->etat = "face";
             if (!isset($_SESSION['comparer'])) {
                 $_SESSION['comparer'] = [];
@@ -51,8 +52,42 @@ class Memory
             if ($_SESSION['plateau'][$_SESSION['comparer'][0]]->image !== $_SESSION['plateau'][$_SESSION['comparer'][1]]->image) {
                 $_SESSION['plateau'][$_SESSION['comparer'][0]]->etat = 'dos';
                 $_SESSION['plateau'][$_SESSION['comparer'][1]]->etat = 'dos';
+            } else {
+                $_SESSION['isWin'] = $this->checkIsWin();
+                if ($_SESSION['isWin']) {
+                    $pdo = new PDO('mysql:host=localhost;dbname=memory', 'root', '');
+                    $sql = "INSERT INTO `score` (`id_utilisateur`, `score_user`, `date`, `nombre_paires`) VALUES (:id_utilisateur, :score_user, :date, :nb_paires)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute([
+                        'id_utilisateur' => $_SESSION['user'],
+                        'score_user' => $_SESSION['nb_click'],
+                        'date' => (new DateTime())->format('y-m-d'),
+                        'nb_paires' => $_SESSION['nb_paires'],
+                    ]);
+                }
             }
             unset($_SESSION['comparer']);
         }
     }
-}
+
+
+    private function checkIsWin()
+    {
+        $cartesDos = array_filter($_SESSION['plateau'], function($carte) {
+           return $carte->etat === 'dos';
+        });
+        return count($cartesDos) === 0;
+    }
+
+    public function startNewGame() {
+
+        unset( 
+            $_SESSION['nb_click'],
+            $_SESSION['nb_paires'],
+            $_SESSION['isWin'],
+            $_SESSION['comparer'],
+            $_SESSION['plateau']
+        );
+        header('Refresh: 1;');
+    }
+}   

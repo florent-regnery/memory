@@ -55,6 +55,17 @@ h3 {
     width: 50px
 }
 
+button[name="open"]:focus ~ button[name="test"] {
+    position: relative;
+    left: 0px;
+    transition: all ease 1s;
+}
+button[name="close"]:focus ~ button[name="test"] {
+    position: relative;
+    left: -150px;
+    transition: all ease 1s;
+}
+
 .carte_face
 /*----------------- CSS Accueil -------------------*/
 
