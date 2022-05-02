@@ -7,8 +7,7 @@ Vous devez utiliser les classes pour réaliser ce projet. Le minimum est une
 classe nommée “Card.php”, que vous utiliserez pour vos différentes cartes
 du jeu.
 
-Il faut pouvoir choisir la taille du jeu, c’est à dire le nombre de paires qui
-seront tirées au sort aléatoirement. Au minimum 3 paires différentes (6
+Il faut pouvoir choisir la taille du jeu, au minimum 3 paires différentes (6
 cartes) au maximum 12 paires.
 
 Rajoutons un wall of fame avec le top 10.
